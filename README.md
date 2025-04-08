@@ -1,1 +1,1 @@
-# Projet-informatique-2-me-semestre
+# Projet-informatique-2-jeu-video-en-2D
