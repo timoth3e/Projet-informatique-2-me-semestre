@@ -1,0 +1,10 @@
+Souffle ardent,Attaque,50,Inflige des dégâts massifs,0,3
+Jet de pierre,Attaque,40,Attaque à distance,0,2
+Trancheur de tête,Attaque,55,Critique brutal,0,4
+Éclair magique,Attaque,45,Frappe magique puissante,0,2
+Soin vital,Soins,30,Soigne un allié,0,3
+Racines entravantes,Debuff,0,Diminue l’agilité de l’ennemi,2,3
+Flèche rapide,Attaque,35,Frappe rapide et précise,0,2
+Coup brutal,Attaque,60,Attaque puissante,0,4
+Coup bas,Debuff,0,Réduit la défense ennemie,3,2
+Rage,Boost,20,Augmente l’attaque pendant 2 tours,2,3
