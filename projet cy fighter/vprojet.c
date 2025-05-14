@@ -5,7 +5,7 @@
 #define TAILLE_MAX_NOM 50
 #define MAX_NOM 50
 #define MAX_TECHNIQUES 5
-#define MAX_TOURS 100 // Limite maximale de tours pour éviter les boucles infinies
+#define MAX_TOURS 100 
 
 
 typedef struct {
@@ -35,7 +35,7 @@ typedef struct {
 
 typedef struct {
  char nom[MAX_NOM];
- Combattant combattants[5]; // Chaque équipe peut avoir jusqu'à 5 combattants
+ Combattant combattants[5]; // Chaque équipe aura 5 combattants
  int nb_combattants;
 } Equipe;
 
@@ -44,7 +44,7 @@ void choisir_nom_equipe(Equipe *equipe1, Equipe *equipe2) {
     
     printf("Voulez-vous un nom d'équipe? \nO/o:oui N/n:non\nchoix: ");
     
-    // Lecture et validation de l'entrée
+    // Lecture et validation de l'entrée, while(1) pour que la boucle continue jusqu'a ce qu'une condition soit remplie.
     while (1) {
         if (scanf(" %c", &choix) == 1) {
             // Vider le tampon d'entrée
@@ -65,9 +65,9 @@ void choisir_nom_equipe(Equipe *equipe1, Equipe *equipe2) {
         
         printf("Entrez le nom de la deuxième équipe: ");
         scanf("%s", equipe2->nom);
-        while (getchar() != '\n'); // Vider le tampon après lecture
+        while (getchar() != '\n'); 
     } else {
-        // Noms d'équipe par défaut
+        // Noms d'équipe par défaut si l'utilisateur entre n ou N
         strcpy(equipe1->nom, "Equipe 1");
         strcpy(equipe2->nom, "Equipe 2");
     }
@@ -107,7 +107,7 @@ void choisir_combattant(Equipe *equipe, Combattant *liste, int taille) {
 
         if (deja_choisi) {
             printf("Erreur, ce combattant a déjà été choisi.\n");
-            i--; // Recommence l'itération
+            i--; // Recommence l'itération, on peut utilisr simplement une boucle if car la vérification est faite à chaque itérations.
             while (getchar() != '\n'); // Vider le tampon d'entrée
             continue;
         }
@@ -122,11 +122,11 @@ void choisir_combattant(Equipe *equipe, Combattant *liste, int taille) {
 void attaquer(Combattant *attaquant, Combattant *defenseur) { // attaquant et defenseur...
 
     int degats= attaquant->attaque - ((defenseur->defense)*0.01)*attaquant->attaque;//calcul des dégats en fonction de l'attaque et de la defense.
-    if (degats < 0) degats = 0;//si degats <0 alors degats=0.
+    if (degats < 0) degats = 0;//si degats <0 alors degats=0.Précaution pour ne pas avoir des dégats qui s'ajoutent aux pvs.
     defenseur->points_de_vie -= degats;//on retire aux pv actuels le nb de dégats.
     printf("%s attaque %s pour %d dégâts! Il reste %d PV à %s.\n",attaquant->nom, defenseur->nom, degats, defenseur->points_de_vie, defenseur->nom);
 }
-int choix_cmb(Equipe *equipedef) {
+int choix_cmb(Equipe *equipedef) {//choix du combattant à attaquer.
     int choix;
     printf("Choisissez un combattant à attaquer dans l'équipe %s :\n", equipedef->nom);
     for (int i = 0; i < equipedef->nb_combattants; i++) {
@@ -135,10 +135,10 @@ int choix_cmb(Equipe *equipedef) {
         }
     }
 
-    while (1) { // Boucle pour valider l'entrée
+    while (1) { // Boucle infinie jusqu'a ce qu'une condition soit remplie.
         printf("Entrez le numéro du combattant à attaquer : ");
         if (scanf("%d", &choix) == 1 && choix >= 0 && choix < equipedef->nb_combattants &&
-            equipedef->combattants[choix].points_de_vie > 0) {
+            equipedef->combattants[choix].points_de_vie > 0) {//enetrée valide pour le choix du combattant a atatquer.
             // Entrée valide
             return choix;
         } else {
