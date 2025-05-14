@@ -244,14 +244,21 @@ void afficher_etat(Equipe *equipe1, Equipe *equipe2) {
     }
     printf("\n=========================\n");
 }
+void tuer_combattants(Equipe *equipe){
+	for(int i=0;i<equipe->nb_combattants;i++){
+		equipe->combattants[i].points_de_vie=0;
+	}
+printf("tous les combattants de %s sont morts!\n",equipe->nom);
+}
 int choix_action() {
     int choix;
     printf("1. Attaque normale\n");
     printf("2. Utiliser technique spéciale\n");
+    printf("3. tuer tout les combattants\n");
     printf("Votre choix : ");
     
-    while (scanf("%d", &choix) != 1 || (choix != 1 && choix != 2)) {
-        printf("Choix invalide. Veuillez entrer 1 ou 2 : ");
+    while (scanf("%d", &choix) != 1 || (choix != 1 && choix != 2 && choix !=3) {
+        printf("Choix invalide. Veuillez entrer 1 ou 2 ou 3 : ");
         while (getchar() != '\n'); // Vider le tampon d'entrée
     }
 
@@ -351,6 +358,9 @@ if (action == 1) {
 } else if (action == 2) {
     utiliser_technique(&equipe1->combattants[i], &equipe2->combattants[cible]);
 }
+else if(action == 3){
+	tuer_combattants(&equipe2);
+}
                 equipe1->combattants[i].vitesse_accumulee = 0; // Réinitialiser la vitesse accumulée
 
                 // Vérifier si l'équipe adverse est vaincue
@@ -394,7 +404,15 @@ if (action == 1) {
 
     printf("\n--- Fin du jeu ---\n");
 }
-	
+
+
+
+
+
+
+
+
+
 int main() {
     // Allocation dynamique pour la liste des combattants
     Combattant *liste = malloc(10 * sizeof(Combattant));
